@@ -1,0 +1,20 @@
+[
+  { "id": 1, "name": "Rust", "price": 40, "image": "images/rust.jpg" },
+  { "id": 2, "name": "Minecraft", "price": 24.99, "image": "images/minecraft.png" },
+  { "id": 3, "name": "Counter-Strike 2", "price": 0, "image": "images/CS2.jpg" },
+  { "id": 4, "name": "Terraria", "price": 9.99, "image": "images/Terraria.jpg" },
+  { "id": 5, "name": "Asphalt Legends Unite", "price": 0, "image": "images/asvalt.jpg" },
+  { "id": 6, "name": "Ведьмак 3: Дикая Охота", "price": 39.99, "image": "images/The_Witcher_.jpg" },
+  { "id": 7, "name": "Forza Horizon 5", "price": 59.99, "image": "images/Forza_Horizon_5.jpg" },
+  { "id": 8, "name": "Cyberpunk 2077", "price": 59.99, "image": "images/Cyberpunk_2077.jpg" },
+  { "id": 9, "name": "Need for Speed", "price": 5.99, "image": "images/need-for-speed-2016.jpg" },
+  { "id": 10, "name": "REPO", "price": 10, "image": "images/repo.jpg" },
+  { "id": 11, "name": "Red Dead Redemption 2", "price": 59.99, "image": "images/Red Dead Redemption 2.jpg" },
+  { "id": 12, "name": "Euro Truck Simulator 2", "price": 4.99, "image": "images/euro track.jpg" },
+  { "id": 13, "name": "The Binding of Isaac", "price": 14.99, "image": "images/isaac.webp" },
+  { "id": 14, "name": "Mafia II", "price": 29.99, "image": "images/Mafia II.jpg" },
+  { "id": 15, "name": "Green Hell", "price": 24.99, "image": "images/green-hell.jpg" },
+  { "id": 16, "name": "Call of Duty", "price": 0, "image": "images/call-of-duty-mobile.jpg" },
+  { "id": 17, "name": "The Last of Us", "price": 59.99, "image": "images/The Last of Us.jpg" },
+  { "id": 18, "name": "Resident Evil Village", "price": 59.99, "image": "images/Resident Evil Village.jpg" }
+]
