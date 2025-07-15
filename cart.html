@@ -10,31 +10,91 @@
 <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header container">
-        <div class="logo-group">
+<header class="header container">
+    <div class="logo-group">
         <img src="images/logo.png" class="logo" >
-    <h1 class="header-title">Gamer Logo</h1>
+        <h1 class="header-title">Gamer Logo</h1>
     </div>
-    <input class="header-search">
-    <ul class="header-navigation">
-        <li class="nav-link">Home</li>
-        <li class="nav-link">Top-Gamer</li>
-        <li class="nav-link">News</li>
-        <li class="nav-link">sales</li>
-        <li class="nav-link">contact us</li>
-    </ul>
-    <img src="images/cart.png" class="header-cart">
-    </header>
 
-    <main class="cart-main container">
-<div class="cart-container">
+    <div class="header-center">
+        <ul class="header-navigation">
+            <a style="text-decoration: none" href="index.html"><li class="nav-link">Home</li></a>
+            <li class="nav-link">Top-Gamer</li>
+            <li class="nav-link">News</li>
+            <li class="nav-link">sales</li>
+            <li class="nav-link">contact us</li>
+        </ul>
+        <div class="search-container" style="opacity: 0.01">
+            <input class="header-search" placeholder="Search games...">
+            <button class="search-button">🔍</button>
+        </div>
+    </div>
 
+    <div class="header-cart-container">
+        <a href="cart.html"><img src="images/cart.png" class="header-cart"></a>
+        <span class="cart-counter">0</span>
+    </div>
+
+</header>
+
+<main class="cart-main container">
+    <div class="cart-left">
+        <div class="cart-container">
+        </div>
+    </div>
+    <div class="cart-right">
+        <div class="cart-total">
+        </div>
+    </div>
+</main>
+
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Checkout</h2>
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="fullName">Full name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Delivery adress:</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Payment methods:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">Choose the payment method please</option>
+                    <option value="card">Bank card</option>
+                    <option value="cash">Cash</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-order-btn">Confirm order</button>
+        </form>
+    </div>
 </div>
-<div class="cart-total">
 
+<div id="successModal" class="modal">
+    <div class="modal-content success-modal">
+        <span class="close">&times;</span>
+        <div class="success-icon">✓</div>
+        <h2>Your order is successful!</h2>
+        <p>Thanks for your time</p>
+        <p>Order number: <span id="orderNumber"></span></p>
+        <button class="ok-btn" onclick="closeSuccessModal()">OK</button>
+    </div>
 </div>
-    </main>
-    <script src="cart.js">
+
+
+<script src="cart.js">
 
     </script>
 </body>

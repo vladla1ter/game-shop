@@ -1,15 +1,15 @@
-// Отримуємо дані про товари з JSON файлу
+
+let allProducts = [];
+
 async function getProducts() {
     let response = await fetch("products.json");
     let products = await response.json();
     return products;
 };
 
-// Генеруємо HTML-код для карточки товару
 function getCardHTML(product) {
-    // Экранируем кавычки в JSON для безопасной передачи
     const productJson = JSON.stringify(product).replace(/"/g, '&quot;');
-    
+
     return `
         <div class="product-card">
             <div class="product-image">
@@ -25,31 +25,86 @@ function getCardHTML(product) {
     `;
 }
 
-
-// Відображаємо товари на сторінці
-getProducts().then(function (products) {
-    let productsList = document.querySelector('.products-container')
+function displayProducts(products) {
+    let productsList = document.querySelector('.products-container');
     if (productsList) {
+        productsList.innerHTML = '';
         products.forEach(function (product) {
-            productsList.innerHTML += getCardHTML(product)
-        })
+            productsList.innerHTML += getCardHTML(product);
+        });
+    }
+}
+
+function searchProducts(searchTerm) {
+    if (!searchTerm.trim()) {
+        displayProducts(allProducts);
+        return;
     }
 
-   })
-   // Функция добавления товара в корзину
+    const filteredProducts = allProducts.filter(product =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    displayProducts(filteredProducts);
+
+    if (filteredProducts.length === 0) {
+        let productsList = document.querySelector('.products-container');
+        if (productsList) {
+            productsList.innerHTML = `
+                <div class="no-results">
+                    <h3>No products found</h3>
+                    <p>No results were found for "${searchTerm}". Please try a different search term.</p>
+                </div>
+`;
+        }
+    }
+}
+
+function initializeSearch() {
+    const searchInput = document.querySelector('.header-search');
+    const searchButton = document.querySelector('.search-button');
+
+    if (searchInput) {
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchProducts(this.value);
+            }, 300); // Задержка 300ms для оптимизации
+        });
+
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts(this.value);
+            }
+        });
+    }
+
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value;
+            searchProducts(searchTerm);
+        });
+    }
+}
+
+getProducts().then(function (products) {
+    allProducts = products;
+    displayProducts(products);
+    initializeSearch();
+    updateCartCounter();
+});
+
 function addToCart(product) {
     const {id, name, price, image} = product
-    
+
     let cart = getCartFromStorage();
 
-    // Проверяем, есть ли уже такой товар в корзине
     let existingItem = cart.find(item => item.id === id);
 
     if (existingItem) {
-        // Если товар уже есть, увеличиваем количество
         existingItem.quantity += 1;
     } else {
-        // Если товара нет, добавляем новый
         cart.push({
             id: id,
             name: name,
@@ -59,10 +114,10 @@ function addToCart(product) {
         });
     }
 
-    // Сохраняем обновленную корзину в localStorage
+
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    // Обновляем счетчик товаров в корзине
+
     updateCartCounter();
 
 }
@@ -73,10 +128,17 @@ function getCartFromStorage() {
 function updateCartCounter() {
     let cart = getCartFromStorage();
     let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    // Обновляем элемент счетчика (если он есть на странице)
+
     let counter = document.querySelector('.cart-counter');
     if (counter) {
         counter.textContent = totalItems;
     }
 }
+
+function getCartFromStorage() {
+    let cart = localStorage.getItem('cart');
+    return cart ? JSON.parse(cart) : [];
+}
+
+updateCartCounter();
+
